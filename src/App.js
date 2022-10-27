@@ -1,8 +1,10 @@
 import { useEffect } from "react";
-import { register } from "./api/users-controller";
+import { BrowserRouter } from "react-router-dom";
+
+import Register from "./routes/Register";
 
 function App() {
-  useEffect(() => {
+  /*useEffect(() => {
     console.log("yup");
     async function doStuff() {
       try {
@@ -12,9 +14,15 @@ function App() {
       }
     }
     doStuff();
-  }, []);
+  }, []);*/
 
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Register />
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
