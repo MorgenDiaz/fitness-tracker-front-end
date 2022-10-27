@@ -28,7 +28,6 @@ export async function register(username, password) {
       }
     );
 
-    console.log("good response: ", serverResponse);
     return serverResponse.data;
   } catch (error) {
     console.error(error);

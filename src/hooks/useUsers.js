@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { register } from "../api/users-controller";
 
-export const useRegisterUser = (username, password) => {
+export const useRegisterUser = ({ username, password }, execute = true) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -17,6 +17,8 @@ export const useRegisterUser = (username, password) => {
 
       setIsLoading(false);
     }
+
+    if (!execute) return { data, isLoading, error };
 
     registerUser();
 
