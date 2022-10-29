@@ -45,14 +45,20 @@ function Header({ links = [] }) {
               </svg>
             </button>
             <ul className="flex flex-col items-center justify-between min-h-[250px]">
-              {links.map((link) => {
+              {links.map((link, index) => {
                 const { name, path } = link;
+
+                const handleClick = () => {
+                  if (link.onClick) link.onClick();
+                  setIsNavOpen(false);
+                };
+
                 return (
                   <li
-                    key={path}
+                    key={index}
                     className="my-8 uppercase border-b border-gray-400"
                   >
-                    <Link onClick={() => setIsNavOpen(false)} to={path}>
+                    <Link onClick={handleClick} to={path}>
                       {name}
                     </Link>
                   </li>
@@ -63,11 +69,17 @@ function Header({ links = [] }) {
         </section>
 
         <ul className="hidden space-x-8 DESKTOP-MENU lg:flex">
-          {links.map((link) => {
+          {links.map((link, index) => {
             const { name, path } = link;
+
+            const handleClick = () => {
+              if (link.onClick) link.onClick();
+              setIsNavOpen(false);
+            };
+
             return (
-              <li key={path}>
-                <Link onClick={() => setIsNavOpen(false)} to={path}>
+              <li key={index}>
+                <Link onClick={handleClick} to={path}>
                   {name}
                 </Link>
               </li>

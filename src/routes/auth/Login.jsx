@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
-import { register } from "../api/users-controller";
-import { TextBox, PrimaryButton, ErrorMessage } from "../components";
+import { StateContext } from "../../context/StateContext";
+import { UserContext } from "../../context/UserContext";
+import { login } from "../../api/users-controller";
+import { TextBox, PrimaryButton, ErrorMessage } from "../../components";
 
-const Register = () => {
+export default function Login() {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -13,19 +14,23 @@ const Register = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  const { setIsLoading } = useContext(StateContext);
   const { setUser } = useContext(UserContext);
 
   const handleFormSubmission = async (event) => {
     event.preventDefault();
 
     try {
-      const data = await register(name, password);
+      setIsLoading(true);
+      const data = await login(name, password);
       const { user, token } = data;
       setUser({ ...user, token: token });
-      //navigate("/");
+      navigate("/");
     } catch (error) {
       setErrorMessage(error.message);
     }
+
+    setIsLoading(false);
   };
 
   const handleNameChanged = (event) => {
@@ -39,9 +44,9 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col pt-12 px-6 grow bg-green-200">
+    <div className="grow flex flex-col pt-12 px-6 ">
       <h2 className="pb-6 text-2xl font-semibold self-center text-gray-900 tracking-wide uppercase ">
-        {"create an account"}
+        {"sign in"}
       </h2>
 
       {errorMessage && <ErrorMessage message={errorMessage} />}
@@ -64,15 +69,16 @@ const Register = () => {
             required={true}
           />
 
-          <PrimaryButton value={"signup"} />
+          <PrimaryButton value={"login"} />
         </form>
       </div>
 
-      <Link to="/login" className="pt-2 uppercase self-center text-gray-800">
-        {"login"}
+      <Link
+        to="/auth/register"
+        className="pt-2 uppercase self-center text-gray-800"
+      >
+        {"register"}
       </Link>
     </div>
   );
-};
-
-export default Register;
+}

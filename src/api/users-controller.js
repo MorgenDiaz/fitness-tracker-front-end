@@ -18,3 +18,20 @@ export async function register(username, password) {
     handleErrors(error);
   }
 }
+
+export async function login(username, password) {
+  try {
+    const serverResponse = await fitnessTrackerApi.post(
+      `${usersController}login`,
+      {
+        username,
+        password,
+      }
+    );
+
+    return serverResponse.data;
+  } catch (error) {
+    console.error(error);
+    handleErrors(error);
+  }
+}
