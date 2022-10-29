@@ -10,6 +10,12 @@ export default function Navigation() {
 
   console.log(user);
 
+  let navLinks = [
+    { name: `Sign in/out`, path: `/auth` },
+    { name: `Routines`, path: `/routines` },
+    { name: `Activities`, path: `/activities` },
+  ];
+
   useEffect(() => {
     /*if (user) {
       navigate("/");
@@ -20,7 +26,7 @@ export default function Navigation() {
 
   return (
     <div className="flex flex-wrap min-h-[100vh] justify-center content-start bg-gray-400">
-      <Header />
+      <Header links={navLinks} />
 
       <div className="content-area flex grow justify-center lg:max-w-4xl ">
         <Outlet />

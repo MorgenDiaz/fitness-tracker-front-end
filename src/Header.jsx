@@ -3,12 +3,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "./resources/logo.png";
 
-function Header() {
+function Header({ links = [] }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
-
-  const MENU_LINK_1 = `Sign in/out`;
-  const MENU_LINK_2 = `Routines`;
-  const MENU_LINK_3 = `Activities`;
 
   return (
     <div className="flex grow basis-full items-center justify-between px-4 py-8 border-b border-gray-400">
@@ -49,44 +45,34 @@ function Header() {
               </svg>
             </button>
             <ul className="flex flex-col items-center justify-between min-h-[250px]">
-              <li className="my-8 uppercase border-b border-gray-400">
-                <Link
-                  onClick={() => setIsNavOpen(false)}
-                  to="/view_quollection"
-                >
-                  {MENU_LINK_1}
-                </Link>
-              </li>
-              <li className="my-8 uppercase border-b border-gray-400">
-                <Link onClick={() => setIsNavOpen(false)} to="/edit_quote">
-                  {MENU_LINK_2}
-                </Link>
-              </li>
-              <li className="my-8 uppercase border-b border-gray-400">
-                <Link onClick={() => setIsNavOpen(false)} to="/">
-                  {MENU_LINK_3}
-                </Link>
-              </li>
+              {links.map((link) => {
+                const { name, path } = link;
+                return (
+                  <li
+                    key={path}
+                    className="my-8 uppercase border-b border-gray-400"
+                  >
+                    <Link onClick={() => setIsNavOpen(false)} to={path}>
+                      {name}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </section>
 
         <ul className="hidden space-x-8 DESKTOP-MENU lg:flex">
-          <li>
-            <Link onClick={() => setIsNavOpen(false)} to="/view_quollection">
-              {MENU_LINK_1}
-            </Link>
-          </li>
-          <li>
-            <Link onClick={() => setIsNavOpen(false)} to="/edit_quote">
-              {MENU_LINK_2}
-            </Link>
-          </li>
-          <li>
-            <Link onClick={() => setIsNavOpen(false)} to="/">
-              {MENU_LINK_3}
-            </Link>
-          </li>
+          {links.map((link) => {
+            const { name, path } = link;
+            return (
+              <li key={path}>
+                <Link onClick={() => setIsNavOpen(false)} to={path}>
+                  {name}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
       <style>{`
