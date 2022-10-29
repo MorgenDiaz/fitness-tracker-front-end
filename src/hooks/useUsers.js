@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { register } from "../api/users-controller";
+import { StateContext } from "../context/StateContext";
 
 export const useRegisterUser = ({ username, password }, execute = true) => {
   const [data, setData] = useState(null);
