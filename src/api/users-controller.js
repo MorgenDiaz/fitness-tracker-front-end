@@ -1,10 +1,9 @@
-import fitnessTrackerApi from "./fitness-tracker-api";
+import { usersController } from "./fitness-tracker-api";
 import { handleErrors } from "./common";
-const usersController = "users/";
 
 export async function register(username, password) {
   try {
-    const serverResponse = await fitnessTrackerApi.post(
+    const serverResponse = await usersController.post(
       `${usersController}register`,
       {
         username,
@@ -21,7 +20,7 @@ export async function register(username, password) {
 
 export async function login(username, password) {
   try {
-    const serverResponse = await fitnessTrackerApi.post(
+    const serverResponse = await usersController.post(
       `${usersController}login`,
       {
         username,

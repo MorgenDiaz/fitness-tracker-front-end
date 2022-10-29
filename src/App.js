@@ -7,6 +7,7 @@ import Register from "./routes/auth/Register";
 import Routines from "./routes/routines/Routines";
 import UserAuthentication from "./routes/auth/UserAuthentication";
 import Login from "./routes/auth/Login";
+import Activities from "./routes/activities/Activities";
 
 function App() {
   const { isLoading } = useContext(StateContext);
@@ -21,6 +22,7 @@ function App() {
             <Route index={true} element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
           </Route>
+          <Route path="/activities" element={<Activities />} />
         </Route>
       </Routes>
     </>
