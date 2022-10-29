@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "./context/UserContext";
 import Header from "./Header";
 import { useEffect } from "react";
@@ -7,21 +7,30 @@ import { useEffect } from "react";
 export default function Navigation() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-
+  const [navLinks, setNavLinks] = useState([]);
   console.log(user);
 
-  let navLinks = [
-    { name: `Sign in/out`, path: `/auth` },
-    { name: `Routines`, path: `/routines` },
-    { name: `Activities`, path: `/activities` },
-  ];
-
   useEffect(() => {
-    /*if (user) {
-      navigate("/");
+    const navLinksSignedIn = [
+      { name: `Sign out`, path: `/auth` },
+      { name: `Routines`, path: `/routines` },
+      { name: `My Routines`, path: `/my-routines` },
+      { name: `Activities`, path: `/activities` },
+    ];
+
+    const navLinksSignedOut = [
+      { name: `Sign in`, path: `/auth` },
+      { name: `Routines`, path: `/routines` },
+      { name: `Activities`, path: `/activities` },
+    ];
+
+    if (user) {
+      setNavLinks(navLinksSignedIn);
+      //navigate("/");
     } else {
-      navigate("/register");
-    }*/
+      //navigate("/register");
+      setNavLinks(navLinksSignedOut);
+    }
   }, [user, navigate]);
 
   return (
