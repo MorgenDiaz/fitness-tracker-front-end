@@ -1,22 +1,6 @@
-import axios from "axios";
-
-const API_URL = "https://gentle-depths-07458.herokuapp.com/api/";
+import fitnessTrackerApi from "./fitness-tracker-api";
+import { handleErrors } from "./common";
 const usersController = "users/";
-
-const fitnessTrackerApi = axios.create({
-  baseURL: API_URL,
-});
-
-function handleErrors(error) {
-  if (error.response) {
-    const { data: apiError } = error.response;
-    console.error("response: ", error.response.data);
-
-    throw new Error(apiError.message);
-  } else {
-    throw new Error("An unexpected error occurred while making your request.");
-  }
-}
 
 export async function register(username, password) {
   try {
