@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 import { register } from "../api/users-controller";
 import { TextBox, PrimaryButton, ErrorMessage } from "../components";
 
