@@ -1,28 +1,32 @@
-import { useState, useEffect } from "react";
-import { register } from "../api/users-controller";
+import { useState, useEffect, useContext, useCallback } from "react";
+import { getRoutines, register } from "../api/users-controller";
 import { StateContext } from "../context/StateContext";
+import { UserContext } from "../context/UserContext";
+import { useGet } from "./useApi";
 
-export const useRegisterUser = ({ username, password }, execute = true) => {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+export const useUsers = () => {
+  const [routines, setRoutines] = useState(null);
   const [error, setError] = useState("");
+  const { setIsLoading } = useContext(StateContext);
+  const { user } = useContext(UserContext);
 
-  useEffect(() => {
-    async function registerUser() {
-      try {
-        const data = await register(username, password);
-        setData(data);
-      } catch (error) {
-        setError(error);
-      }
+  const refreshRoutines = useCallback(async () => {
+    setIsLoading(true);
 
-      setIsLoading(false);
+    try {
+      const responseData = await getRoutines(user.username, user.token);
+      console.log(responseData);
+      setRoutines(responseData);
+    } catch (error) {
+      setError(error);
     }
 
-    if (!execute) return { data, isLoading, error };
+    setIsLoading(false);
+  }, [setIsLoading, user.username, user.token]);
 
-    registerUser();
+  useEffect(() => {
+    refreshRoutines();
+  }, [refreshRoutines]);
 
-    return { data, isLoading, error };
-  }, [username, password]);
+  return { routines, refreshRoutines, error };
 };
