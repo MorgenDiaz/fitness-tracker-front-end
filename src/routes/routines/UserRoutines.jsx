@@ -3,6 +3,7 @@ import { useAllPublicRoutines } from "../../hooks/useRoutines";
 import { useUsers } from "../../hooks/useUsers";
 import CreateRoutine from "./CreateRoutine";
 import Routine from "./components/Routine";
+import UserRoutine from "./UserRoutine";
 
 export default function UserRoutines() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function UserRoutines() {
       {routines?.map((routine) => {
         const { id } = routine;
 
-        return <Routine key={id} routine={routine} />;
+        return <UserRoutine key={id} routine={routine} />;
       })}
     </div>
   );

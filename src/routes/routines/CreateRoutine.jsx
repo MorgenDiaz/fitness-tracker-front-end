@@ -1,7 +1,6 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
-import { createRoutine } from "../../api/routines-controller";
+import { useRoutines } from "../../hooks/useRoutines";
 import {
   ErrorMessage,
   TextBox,
@@ -16,22 +15,23 @@ export default function CreateRoutine() {
   const [name, setName] = useState(originalRoutine?.name || "");
   const [goal, setGoal] = useState(originalRoutine?.goal || "");
   const [isPublic, setIsPublic] = useState(originalRoutine?.isPublic || false);
-  const [errorMessage, setErrorMessage] = useState("");
 
-  const { user } = useContext(UserContext);
+  const { create, update, error } = useRoutines();
+
+  const formTitle = originalRoutine ? "Update Routine" : "Create Routine";
+  const actionButtonLabel = originalRoutine ? "Update" : "Create";
 
   async function handleFormSubmission(event) {
     event.preventDefault();
-    try {
-      await createRoutine(user.token, {
-        name,
-        goal,
-        isPublic,
-      });
-      navigate("/my-routines");
-    } catch (error) {
-      setErrorMessage(error.message);
+    let success = false;
+
+    if (originalRoutine) {
+      success = await update(originalRoutine.id, { name, goal, isPublic });
+    } else {
+      success = await create({ name, goal, isPublic });
     }
+
+    if (success) navigate("/my-routines");
   }
 
   const handleNameChanged = (event) => {
@@ -52,10 +52,10 @@ export default function CreateRoutine() {
   return (
     <div className="grow flex flex-col pt-12 px-6">
       <h2 className="pb-6 text-2xl font-semibold self-center text-gray-900 tracking-wide uppercase ">
-        {"Create Routine"}
+        {formTitle}
       </h2>
       <div className="self-center">
-        {errorMessage && <ErrorMessage message={errorMessage} />}
+        {error && <ErrorMessage message={error.message} />}
       </div>
       <div className="flex justify-center">
         <form
@@ -89,7 +89,7 @@ export default function CreateRoutine() {
             />
           </div>
 
-          <PrimaryButton value={"Create"} />
+          <PrimaryButton value={actionButtonLabel} />
         </form>
       </div>
     </div>

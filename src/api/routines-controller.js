@@ -27,3 +27,24 @@ export async function createRoutine(token, routine) {
     handleErrors(error);
   }
 }
+
+export async function updateRoutine(token, routineId, routine) {
+  try {
+    const config = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const serverResponse = await routinesController.patch(
+      `${routineId}`,
+      routine,
+      config
+    );
+
+    return serverResponse.data;
+  } catch (error) {
+    console.error(error);
+    handleErrors(error);
+  }
+}
