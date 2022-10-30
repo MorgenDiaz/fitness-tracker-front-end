@@ -48,3 +48,23 @@ export async function updateRoutine(token, routineId, routine) {
     handleErrors(error);
   }
 }
+
+export async function deleteRoutine(token, routineId) {
+  try {
+    const config = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const serverResponse = await routinesController.delete(
+      `${routineId}`,
+      config
+    );
+
+    return serverResponse.data;
+  } catch (error) {
+    console.error(error);
+    handleErrors(error);
+  }
+}

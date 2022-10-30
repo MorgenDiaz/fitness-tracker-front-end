@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
+import { useRoutines } from "../../hooks/useRoutines";
 import { EditButton } from "../../components";
 import RoutineActivities from "./components/RoutineActivities";
 
-export default function UserRoutine({ routine }) {
+export default function UserRoutine({ routine, onRoutineDeleted }) {
   const navigate = useNavigate();
   const { creatorId, creatorName, id, name, goal, activities } = routine;
+
+  const { destroy } = useRoutines();
 
   return (
     <div className=" flex flex-col bg-gray-100 px-6 pt-2 pb-4 border-b border-gray-500">
@@ -16,8 +19,11 @@ export default function UserRoutine({ routine }) {
         />
 
         <svg
-          onClick={() => {
-            //deletePostClickedHandler(post._id);
+          onClick={async () => {
+            const success = await destroy(id);
+            if (success) {
+              onRoutineDeleted();
+            }
           }}
           xmlns="http://www.w3.org/2000/svg"
           fill="#ef9a9a"

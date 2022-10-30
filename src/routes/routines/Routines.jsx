@@ -1,8 +1,8 @@
-import { useAllPublicRoutines } from "../../hooks/useRoutines";
+import { useRoutines } from "../../hooks/useRoutines";
 import Routine from "./components/Routine";
 
 export default function Routines() {
-  const { routines } = useAllPublicRoutines();
+  const { routines } = useRoutines();
 
   return (
     <div className="grow flex flex-col place-content-evenly content-evenly pt-10">
