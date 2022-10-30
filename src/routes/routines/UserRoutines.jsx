@@ -1,8 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useAllPublicRoutines } from "../../hooks/useRoutines";
 import { useUsers } from "../../hooks/useUsers";
-import CreateRoutine from "./CreateRoutine";
-import Routine from "./components/Routine";
 import UserRoutine from "./UserRoutine";
 
 export default function UserRoutines() {

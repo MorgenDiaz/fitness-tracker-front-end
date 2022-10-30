@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, useCallback } from "react";
 import { StateContext } from "../context/StateContext";
 import { UserContext } from "../context/UserContext";
 import {
-  getAll,
+  getAllPublicRoutines,
   createRoutine,
   updateRoutine,
   deleteRoutine,
@@ -18,7 +18,7 @@ export const useRoutines = () => {
     setIsLoading(true);
 
     try {
-      const responseData = await getAll();
+      const responseData = await getAllPublicRoutines();
       setRoutines(responseData);
     } catch (error) {
       setError(error);

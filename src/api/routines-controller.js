@@ -1,7 +1,7 @@
 import { routinesController } from "./fitness-tracker-api";
 import { handleErrors } from "./common";
 
-export async function getAll() {
+export async function getAllPublicRoutines() {
   try {
     const serverResponse = await routinesController.get();
 

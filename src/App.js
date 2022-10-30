@@ -10,6 +10,7 @@ import Login from "./routes/auth/Login";
 import Activities from "./routes/activities/Activities";
 import UserRoutines from "./routes/routines/UserRoutines";
 import CreateRoutine from "./routes/routines/CreateRoutine";
+import CreateActivity from "./routes/activities/CreateActivity";
 
 function App() {
   const { isLoading } = useContext(StateContext);
@@ -27,6 +28,7 @@ function App() {
           <Route path="/activities" element={<Activities />} />
           <Route path="/my-routines" element={<UserRoutines />} />
           <Route path="/create-routine" element={<CreateRoutine />} />
+          <Route path="/create-activity" element={<CreateActivity />} />
         </Route>
       </Routes>
     </>
