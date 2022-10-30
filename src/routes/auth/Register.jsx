@@ -49,7 +49,9 @@ export default function Register() {
         {"create an account"}
       </h2>
 
-      {errorMessage && <ErrorMessage message={errorMessage} />}
+      <div className="self-center">
+        {errorMessage && <ErrorMessage message={errorMessage} />}
+      </div>
 
       <div className="flex justify-center">
         <form

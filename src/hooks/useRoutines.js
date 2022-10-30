@@ -33,7 +33,7 @@ export const useRoutines = () => {
       let success = false;
 
       try {
-        await createRoutine(user.token, routine);
+        await createRoutine(user?.token, routine);
         success = true;
       } catch (error) {
         setError(error);
@@ -42,7 +42,7 @@ export const useRoutines = () => {
       setIsLoading(false);
       return success;
     },
-    [setIsLoading, user.token]
+    [setIsLoading, user?.token]
   );
 
   const update = useCallback(
@@ -51,7 +51,7 @@ export const useRoutines = () => {
       let success = false;
 
       try {
-        await updateRoutine(user.token, routineId, routine);
+        await updateRoutine(user?.token, routineId, routine);
         success = true;
       } catch (error) {
         setError(error);
@@ -60,7 +60,7 @@ export const useRoutines = () => {
       setIsLoading(false);
       return success;
     },
-    [setIsLoading, user.token]
+    [setIsLoading, user?.token]
   );
 
   const destroy = useCallback(
@@ -69,7 +69,7 @@ export const useRoutines = () => {
       let success = false;
 
       try {
-        await deleteRoutine(user.token, routineId);
+        await deleteRoutine(user?.token, routineId);
         success = true;
       } catch (error) {
         setError(error);
@@ -78,7 +78,7 @@ export const useRoutines = () => {
       setIsLoading(false);
       return success;
     },
-    [setIsLoading, user.token]
+    [setIsLoading, user?.token]
   );
 
   useEffect(() => {

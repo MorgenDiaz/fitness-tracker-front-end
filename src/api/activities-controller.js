@@ -7,7 +7,26 @@ export async function getAllActivities() {
 
     return serverResponse.data;
   } catch (error) {
-    console.log(error);
+    handleErrors(error);
+  }
+}
+
+export async function createActivity(token, activity) {
+  try {
+    const config = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const serverResponse = await activitiesController.post(
+      "",
+      activity,
+      config
+    );
+
+    return serverResponse.data;
+  } catch (error) {
     handleErrors(error);
   }
 }

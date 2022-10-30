@@ -35,7 +35,7 @@ export default function CreateActivity() {
       success = await create({ name, description });
     }
 
-    if (success) navigate("/my-routines");
+    if (success) navigate("/activities");
   }
 
   const handleNameChanged = (event) => {
