@@ -30,3 +30,24 @@ export async function createActivity(token, activity) {
     handleErrors(error);
   }
 }
+
+export async function updateActivity(token, activityId, activity) {
+  try {
+    const config = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const serverResponse = await activitiesController.patch(
+      `${activityId}`,
+      activity,
+      config
+    );
+
+    return serverResponse.data;
+  } catch (error) {
+    console.error(error);
+    handleErrors(error);
+  }
+}

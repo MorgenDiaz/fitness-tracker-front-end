@@ -1,7 +1,11 @@
 import { useState, useEffect, useContext, useCallback } from "react";
 import { StateContext } from "../context/StateContext";
 import { UserContext } from "../context/UserContext";
-import { getAllActivities, createActivity } from "../api/activities-controller";
+import {
+  getAllActivities,
+  createActivity,
+  updateActivity,
+} from "../api/activities-controller";
 
 export const useActivities = () => {
   const [activities, setActivities] = useState([]);
@@ -40,9 +44,26 @@ export const useActivities = () => {
     [setIsLoading, user?.token]
   );
 
+  const update = useCallback(
+    async (activityId, activity) => {
+      setIsLoading(true);
+      let success = false;
+      try {
+        await updateActivity(user?.token, activityId, activity);
+        success = true;
+      } catch (error) {
+        setError(error);
+      }
+
+      setIsLoading(false);
+      return success;
+    },
+    [setIsLoading, user?.token]
+  );
+
   useEffect(() => {
     refreshActivities();
   }, [refreshActivities]);
 
-  return { activities, refreshActivities, create, error };
+  return { activities, refreshActivities, create, update, error };
 };

@@ -30,7 +30,13 @@ export default function Activities() {
 
       <div className="flex flex-wrap gap-4">
         {activities.map((activity) => {
-          return <Activity key={activity.id} activity={activity} />;
+          return (
+            <Activity
+              key={activity.id}
+              activity={activity}
+              isEditable={user != null}
+            />
+          );
         })}
       </div>
     </div>

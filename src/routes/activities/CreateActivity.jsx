@@ -27,6 +27,7 @@ export default function CreateActivity() {
     let success = false;
 
     if (originalActivity) {
+      console.log("original: ", originalActivity);
       success = await update(originalActivity.id, {
         name,
         description,

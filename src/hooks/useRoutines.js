@@ -64,7 +64,7 @@ export const useRoutines = () => {
   );
 
   const destroy = useCallback(
-    async (routineId, routine) => {
+    async (routineId) => {
       setIsLoading(true);
       let success = false;
 
