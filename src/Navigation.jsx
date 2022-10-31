@@ -8,7 +8,6 @@ export default function Navigation() {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
   const [navLinks, setNavLinks] = useState([]);
-  console.log(user);
 
   useEffect(() => {
     const navLinksSignedIn = [
