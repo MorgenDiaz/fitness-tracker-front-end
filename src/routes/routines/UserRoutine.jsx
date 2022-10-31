@@ -10,7 +10,7 @@ export default function UserRoutine({
   onActivityAddedHandler,
 }) {
   const navigate = useNavigate();
-  const { creatorId, creatorName, id, name, goal, activities } = routine;
+  const { creatorName, id, name, goal, activities } = routine;
 
   const { destroy } = useRoutines();
 
@@ -59,7 +59,7 @@ export default function UserRoutine({
         <div>
           <CreateRoutineActivity
             onActivityAddedHandler={onActivityAddedHandler}
-            routineId={routine.id}
+            routineId={id}
           />
         </div>
         <RoutineActivities activities={activities} />

@@ -1,8 +1,7 @@
 import { useState, useEffect, useContext, useCallback } from "react";
-import { getRoutines, register } from "../api/users-controller";
+import { getRoutines } from "../api/users-controller";
 import { StateContext } from "../context/StateContext";
 import { UserContext } from "../context/UserContext";
-import { useGet } from "./useApi";
 
 export const useUsers = () => {
   const [routines, setRoutines] = useState(null);

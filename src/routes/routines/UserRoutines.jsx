@@ -4,7 +4,7 @@ import UserRoutine from "./UserRoutine";
 
 export default function UserRoutines() {
   const navigate = useNavigate();
-  const { routines, refreshRoutines, error } = useUsers();
+  const { routines, refreshRoutines } = useUsers();
 
   const handleRoutineDeleted = () => {
     refreshRoutines();

@@ -1,7 +1,7 @@
 import RoutineActivities from "./RoutineActivities";
 
 export default function Routine({ routine }) {
-  const { creatorId, creatorName, id, name, goal, activities } = routine;
+  const { creatorName, name, goal, activities } = routine;
 
   return (
     <div className=" flex flex-col bg-gray-100 px-6 pt-8 pb-4 border-b border-gray-500">

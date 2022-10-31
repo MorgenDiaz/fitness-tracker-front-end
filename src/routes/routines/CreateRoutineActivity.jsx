@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { AddButton, NumberInput, Selection } from "../../components";
 import { useActivities } from "../../hooks/useActivities";
 import { useRoutines } from "../../hooks/useRoutines";
@@ -8,7 +8,6 @@ export default function CreateRoutineActivity({
   routineId,
   onActivityAddedHandler,
 }) {
-  const navigate = useNavigate();
   const originalRoutineActivity = useLocation().state?.routineActivity;
 
   const [name, setName] = useState(originalRoutineActivity?.name || "");
