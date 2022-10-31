@@ -23,3 +23,22 @@ export async function updateRoutineActivity(
     handleErrors(error);
   }
 }
+
+export async function deleteRoutineActivity(token, routineActivityId) {
+  try {
+    const config = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const serverResponse = await routineActivitiesController.delete(
+      `${routineActivityId}`,
+      config
+    );
+
+    return serverResponse.data;
+  } catch (error) {
+    handleErrors(error);
+  }
+}

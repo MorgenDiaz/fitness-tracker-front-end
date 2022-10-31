@@ -8,6 +8,7 @@ export default function UserRoutine({
   routine,
   onRoutineDeleted,
   onActivityAddedHandler,
+  onActivityDeletedHandler,
 }) {
   const navigate = useNavigate();
   const { creatorName, id, name, goal, activities } = routine;
@@ -62,7 +63,11 @@ export default function UserRoutine({
             routineId={id}
           />
         </div>
-        <RoutineActivities activities={activities} canEdit={true} />
+        <RoutineActivities
+          activities={activities}
+          canEdit={true}
+          activityDeletedHandler={onActivityDeletedHandler}
+        />
       </div>
     </div>
   );

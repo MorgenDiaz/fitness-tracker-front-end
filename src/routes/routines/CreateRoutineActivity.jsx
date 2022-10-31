@@ -23,6 +23,9 @@ export default function CreateRoutineActivity({
       duration: Number(duration),
     });
 
+    setCount(0);
+    setDuration(0);
+
     if (success) {
       onActivityAddedHandler();
     }
