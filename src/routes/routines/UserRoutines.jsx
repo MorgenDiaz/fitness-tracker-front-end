@@ -10,6 +10,10 @@ export default function UserRoutines() {
     refreshRoutines();
   };
 
+  const handleActivityAdded = () => {
+    refreshRoutines();
+  };
+
   return (
     <div className="grow flex flex-col place-content-evenly content-evenly pt-10">
       <h2 className="pb-6 text-2xl font-semibold self-center text-gray-900 tracking-wide uppercase ">
@@ -33,6 +37,7 @@ export default function UserRoutines() {
             key={id}
             routine={routine}
             onRoutineDeleted={handleRoutineDeleted}
+            onActivityAddedHandler={handleActivityAdded}
           />
         );
       })}

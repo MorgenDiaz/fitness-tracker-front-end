@@ -13,3 +13,7 @@ export const routinesController = axios.create({
 export const activitiesController = axios.create({
   baseURL: API_URL + "activities/",
 });
+
+export const routineActivitiesController = axios.create({
+  baseURL: API_URL + "routine_activities/",
+});

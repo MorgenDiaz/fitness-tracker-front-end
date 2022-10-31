@@ -6,6 +6,7 @@ import {
   createRoutine,
   updateRoutine,
   deleteRoutine,
+  createRoutineActivity,
 } from "../api/routines-controller";
 
 export const useRoutines = () => {
@@ -81,9 +82,35 @@ export const useRoutines = () => {
     [setIsLoading, user?.token]
   );
 
+  const addActivity = useCallback(
+    async (routineId, routineActivity) => {
+      setIsLoading(true);
+      let success = false;
+
+      try {
+        await createRoutineActivity(user?.token, routineId, routineActivity);
+        success = true;
+      } catch (error) {
+        setError(error);
+      }
+
+      setIsLoading(false);
+      return success;
+    },
+    [setIsLoading, user?.token]
+  );
+
   useEffect(() => {
     refreshRoutines();
   }, [refreshRoutines]);
 
-  return { routines, refreshRoutines, create, update, destroy, error };
+  return {
+    routines,
+    refreshRoutines,
+    create,
+    update,
+    destroy,
+    addActivity,
+    error,
+  };
 };

@@ -1,9 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useRoutines } from "../../hooks/useRoutines";
 import { EditButton } from "../../components";
+import CreateRoutineActivity from "./CreateRoutineActivity";
 import RoutineActivities from "./components/RoutineActivities";
 
-export default function UserRoutine({ routine, onRoutineDeleted }) {
+export default function UserRoutine({
+  routine,
+  onRoutineDeleted,
+  onActivityAddedHandler,
+}) {
   const navigate = useNavigate();
   const { creatorId, creatorName, id, name, goal, activities } = routine;
 
@@ -50,6 +55,13 @@ export default function UserRoutine({ routine, onRoutineDeleted }) {
 
       <div className="mb-8 pl-2 pr-4">
         <p className="mb-4">{goal}</p>
+
+        <div>
+          <CreateRoutineActivity
+            onActivityAddedHandler={onActivityAddedHandler}
+            routineId={routine.id}
+          />
+        </div>
         <RoutineActivities activities={activities} />
       </div>
     </div>

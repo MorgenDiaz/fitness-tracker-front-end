@@ -68,3 +68,25 @@ export async function deleteRoutine(token, routineId) {
     handleErrors(error);
   }
 }
+
+export async function createRoutineActivity(token, routineId, routineActivity) {
+  try {
+    console.log("Chuuh");
+    const config = {};
+
+    if (token) {
+      config.headers = { Authorization: `Bearer ${token}` };
+    }
+
+    const serverResponse = await routinesController.post(
+      `${routineId}/activities`,
+      config,
+      routineActivity
+    );
+
+    return serverResponse.data;
+  } catch (error) {
+    console.error(error);
+    handleErrors(error);
+  }
+}
