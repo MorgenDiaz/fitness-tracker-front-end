@@ -62,7 +62,7 @@ export default function UserRoutine({
             routineId={id}
           />
         </div>
-        <RoutineActivities activities={activities} />
+        <RoutineActivities activities={activities} canEdit={true} />
       </div>
     </div>
   );

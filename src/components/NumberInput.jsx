@@ -9,7 +9,7 @@ export default function NumberInput({
   };
 
   return (
-    <div className="mb-3 xl:w-96">
+    <div className="mb-3 ">
       <label
         htmlFor="exampleNumber0"
         className="form-label inline-block mb-2 text-gray-700"

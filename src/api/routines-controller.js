@@ -23,7 +23,6 @@ export async function createRoutine(token, routine) {
 
     return serverResponse.data;
   } catch (error) {
-    console.error(error);
     handleErrors(error);
   }
 }
@@ -44,7 +43,6 @@ export async function updateRoutine(token, routineId, routine) {
 
     return serverResponse.data;
   } catch (error) {
-    console.error(error);
     handleErrors(error);
   }
 }
@@ -64,14 +62,12 @@ export async function deleteRoutine(token, routineId) {
 
     return serverResponse.data;
   } catch (error) {
-    console.error(error);
     handleErrors(error);
   }
 }
 
 export async function createRoutineActivity(token, routineId, routineActivity) {
   try {
-    console.log("Chuuh");
     const config = {};
 
     if (token) {
@@ -80,13 +76,12 @@ export async function createRoutineActivity(token, routineId, routineActivity) {
 
     const serverResponse = await routinesController.post(
       `${routineId}/activities`,
-      config,
-      routineActivity
+      routineActivity,
+      config
     );
 
     return serverResponse.data;
   } catch (error) {
-    console.error(error);
     handleErrors(error);
   }
 }

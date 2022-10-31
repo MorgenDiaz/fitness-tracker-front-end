@@ -11,6 +11,7 @@ import Activities from "./routes/activities/Activities";
 import UserRoutines from "./routes/routines/UserRoutines";
 import CreateRoutine from "./routes/routines/CreateRoutine";
 import CreateActivity from "./routes/activities/CreateActivity";
+import EditRoutineActivity from "./routes/routines/EditRoutineActivity";
 
 function App() {
   const { isLoading } = useContext(StateContext);
@@ -29,6 +30,10 @@ function App() {
           <Route path="/my-routines" element={<UserRoutines />} />
           <Route path="/create-routine" element={<CreateRoutine />} />
           <Route path="/create-activity" element={<CreateActivity />} />
+          <Route
+            path="/edit-routine-activity"
+            element={<EditRoutineActivity />}
+          />
         </Route>
       </Routes>
     </>

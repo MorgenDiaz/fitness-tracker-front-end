@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
 import { AddButton, NumberInput, Selection } from "../../components";
 import { useActivities } from "../../hooks/useActivities";
 import { useRoutines } from "../../hooks/useRoutines";
@@ -8,36 +7,25 @@ export default function CreateRoutineActivity({
   routineId,
   onActivityAddedHandler,
 }) {
-  const originalRoutineActivity = useLocation().state?.routineActivity;
-
-  const [name, setName] = useState(originalRoutineActivity?.name || "");
-  const [count, setCount] = useState(originalRoutineActivity?.count || 0);
-  const [duration, setDuration] = useState(
-    originalRoutineActivity?.duration || 0
-  );
+  const [name, setName] = useState("");
+  const [count, setCount] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const { activities } = useActivities();
-  const { addActivity, error } = useRoutines();
+  const { addActivity } = useRoutines();
 
   const handleCreateRoutineActivityClicked = async (event) => {
     const activity = activities.find((activity) => activity.name === name);
 
     const success = await addActivity(routineId, {
       activityId: activity.id,
-      name,
-      count,
-      duration,
+      count: Number(count),
+      duration: Number(duration),
     });
 
-    console.log(success);
     if (success) {
       onActivityAddedHandler();
     }
-    console.log(error);
-  };
-
-  const handleUpdateRoutineActivityClicked = (event) => {
-    event.preventDefault();
   };
 
   const handleActivityNameChanged = (selectedActivity) => {
@@ -53,10 +41,7 @@ export default function CreateRoutineActivity({
   };
 
   return (
-    <form
-      onSubmit={handleUpdateRoutineActivityClicked}
-      className="flex flex gap-4 lg:max-w-xl grow"
-    >
+    <form className="flex flex gap-4 lg:max-w-xl grow">
       <Selection
         label={"Add Activity"}
         options={activities.map((activity) => activity.name)}
