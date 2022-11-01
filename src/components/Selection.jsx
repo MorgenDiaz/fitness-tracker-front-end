@@ -31,17 +31,7 @@ const Selection = ({ label, options = [], onSelectionChanged }) => {
         onChange={handleSelectionChanged}
       >
         {options.map((name, index) => {
-          return (
-            <option
-              onSelect={() => {
-                console.log("quah");
-                alert("clicky");
-              }}
-              key={index}
-            >
-              {name}
-            </option>
-          );
+          return <option key={index}>{name}</option>;
         })}
       </select>
     </div>
